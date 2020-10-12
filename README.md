@@ -9,15 +9,11 @@ C# UWP Application
 Open the .sln file with Visual Studio. You should verify if the nuget packages are correctly loaded.
 Then, just target to "Release" and run the application (F5)
 
-Help for uss gradlew - https://developer.android.com/studio/build/building-cmdline.html
-Run
-Run the app from Android Studio
-
-Target
+## Target
 C#/XAML - UWP (10) 
 WebAPI 
 
-Version
+## Version
 **0.1
 Authors
 António Arantes
