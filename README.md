@@ -15,5 +15,6 @@ WebAPI
 
 ## Version
 **0.1**
-Authors
+
+## Authors
 **António Arantes**
