@@ -1,6 +1,6 @@
 
 # Bliss Recruitment
-Application is for evaluation to BACKEND RECRUITMENT position
+Application for evaluation to BACKEND RECRUITMENT position
 
 ## Getting Started
 C# UWP Application
