@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="BRApp.ListScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BRApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1006">
+
+    <Grid Margin="0,10,10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="117*"/>
+            <ColumnDefinition Width="402*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="136*"/>
+            <ColumnDefinition Width="273*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="BackButton" Click="Back_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" Margin="15,124,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="15,10,0,0" Text="List Screen" TextWrapping="Wrap" VerticalAlignment="Top" Height="71" Width="165" FontSize="20" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <TextBox x:Name="sbar" TextChanged="sbar_TextChanged" PlaceholderText="Enter the item to search" Margin="15,52,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="239"/>
+        <Button Content="Search" Width="99" Click="Button_Click" Margin="15,87,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="0.17"/>
+            </Button.RenderTransform>
+        </Button>
+        <ListView x:Name="questionsList"  Margin="12,164,16,104" RequestedTheme="Default" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" SelectionChanged="questionsList_SelectionChanged" Grid.ColumnSpan="7">
+            <ListView.RenderTransform>
+                <CompositeTransform SkewY="-0.393" TranslateY="-3.743"/>
+            </ListView.RenderTransform>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Thumb}" Width="120" Height="120"/>
+                        <TextBlock Text="{Binding QuestionListNames}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

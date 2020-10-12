@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="BRApp.ShareScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BRApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Button x:Name="BackButton" Click="Back_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" Margin="12,56,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Height="45" Margin="24,22,0,0" Text="Share Screen" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,141,0,0" Text="Id:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="28" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock x:Name="idTxt" HorizontalAlignment="Left" Margin="165,141,0,0" Text="Id:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="28" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock HorizontalAlignment="Left" Margin="50,173,0,0" Text="Question:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="116" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock x:Name="questionTxt" HorizontalAlignment="Left" Margin="165,173,0,0" Text="Question:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="806" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock HorizontalAlignment="Left" Margin="50,206,0,0" Text="Image:" TextWrapping="Wrap" VerticalAlignment="Top" Height="197" Width="116" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <Image x:Name="imgSrc" HorizontalAlignment="Left" Height="200  " Margin="165,206,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBlock HorizontalAlignment="Left" Margin="58,428,0,0" Text="Publish:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="80" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock x:Name="publishTxt" HorizontalAlignment="Left" Margin="165,428,0,0" Text="Publish:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="394" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <TextBlock HorizontalAlignment="Left" Margin="58,484,0,0" Text="Choices:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="80" FontSize="20" Style="{StaticResource CaptionTextBlockStyle}"  />
+        <ListView x:Name="choicesGrid"  Margin="165,484,789,68" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Choices">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{x:Bind Path=ChoicesQuestionVotes}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <TextBox x:Name="emailTxt" PlaceholderText="Insert valid e-mail to share..." HorizontalAlignment="Left" Margin="52,64,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" />
+        <Button x:Name="sendEmailBtn" Content="Send" Margin="360,64,0,0" VerticalAlignment="Top" Click="SendEmailBtn_Click"/>
+
+    </Grid>
+</Page>
