@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
 namespace BRApp.Controls
 {
     public static class LogWriter
     {
+        /// <summary>
+        /// Output to catch the exceptions and write them to the console
+        /// </summary>
         public static void WriteLog(Exception ex)
         {
-            
             StringBuilder sb = new StringBuilder();
             sb.Append("-----------------------------------------------------------------------------");
             sb.Append("Date : " + DateTime.Now.ToString());
@@ -20,17 +22,21 @@ namespace BRApp.Controls
 
             Console.Write(sb.ToString());
             Debug.Write(sb.ToString());
-            
         }
 
+        /// <summary>
+        /// Trigger notifications to alter user
+        /// </summary>
+        /// <param name="message">Message in the notification</param>
+        /// <param name="title">Notification title</param>
         public static void ShowToast(string message, string title)
         {
-            Windows.Data.Xml.Dom.XmlDocument notificationXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-            Windows.Data.Xml.Dom.XmlNodeList toastElement = notificationXml.GetElementsByTagName("text");
+            XmlDocument notificationXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            XmlNodeList toastElement = notificationXml.GetElementsByTagName("text");
             toastElement[0].AppendChild(notificationXml.CreateTextNode(title));
             toastElement[1].AppendChild(notificationXml.CreateTextNode(message));
-            ToastNotification toastNotification = new ToastNotification(notificationXml);
-            ToastNotificationManager.CreateToastNotifier().Show(toastNotification);
+
+            ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(notificationXml));
         }
     }
 }

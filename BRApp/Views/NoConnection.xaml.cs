@@ -3,50 +3,58 @@ using Windows.Networking.Connectivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace BRApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// No connection screen
     /// </summary>
     public sealed partial class NoConnection : Page
     {
+        #region Vars
+
         private DispatcherTimer timer;
         private int basetime;
+
+        #endregion Vars
+
+        #region Ctor
 
         public NoConnection()
         {
             InitializeComponent();
 
-           
-
             TimerGo();
         }
-        void timer_Tick(object sender, object e)
+
+        #endregion Ctor
+
+        #region Timer ecountdown mechanism
+
+        private void timer_Tick(object sender, object e)
         {
             basetime = basetime - 1;
             txtTimer.Text = basetime.ToString();
             if (basetime == 0)
             {
-               
                 timer.Stop();
 
                 if (NetworkInformation.GetInternetConnectionProfile() != null)
                 {
-                    if (this.Frame.CanGoBack)
+                    if (Frame.CanGoBack)
                     {
-                        this.Frame.GoBack();
+                        Frame.GoBack();
                     }
                 }
                 else
                 {
-                    
                     TimerGo();
                 }
             }
-
         }
+
+        #endregion Timer ecountdown mechanism
+
+        #region Timer start
 
         private void TimerGo()
         {
@@ -57,19 +65,7 @@ namespace BRApp
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += timer_Tick;
         }
-        private void btnStart_Click_1(object sender, EventArgs e)
-        {
-            
-        }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
+        #endregion Timer start
     }
 }

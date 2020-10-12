@@ -120,23 +120,23 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EmailHelper.cs" />
-    <Compile Include="DetailScreen.xaml.cs">
+    <Compile Include="Views\DetailScreen.xaml.cs">
       <DependentUpon>DetailScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListScreen.xaml.cs">
+    <Compile Include="Views\ListScreen.xaml.cs">
       <DependentUpon>ListScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Questions.cs" />
     <Compile Include="Controls\HttpHandling.cs" />
     <Compile Include="Controls\LogWriter.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoConnection.xaml.cs">
+    <Compile Include="Views\NoConnection.xaml.cs">
       <DependentUpon>NoConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShareScreen.xaml.cs">
+    <Compile Include="Views\ShareScreen.xaml.cs">
       <DependentUpon>ShareScreen.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -204,23 +204,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="DetailScreen.xaml">
+    <Page Include="Views\DetailScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListScreen.xaml">
+    <Page Include="Views\ListScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="NoConnection.xaml">
+    <Page Include="Views\NoConnection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShareScreen.xaml">
+    <Page Include="Views\ShareScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

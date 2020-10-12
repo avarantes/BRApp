@@ -1,64 +1,61 @@
-﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using System.Threading.Tasks;
-using BRApp.Controls;
-using Windows.UI.Popups;
-using Windows.Networking.Connectivity;
+﻿using BRApp.Controls;
+using System;
 using System.Net.NetworkInformation;
-
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using System.Threading.Tasks;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace BRApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Main page that check health status
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-
+        #region Ctor
 
         public MainPage()
         {
-
             InitializeComponent();
 
             Loaded += (sender, args) => GetApiStatus();
-          
+
             NetworkChange.NetworkAvailabilityChanged += AvailabilityChanged;
-         
         }
+
+        #endregion Ctor
+
+        #region Network availability
+
         private async void AvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
-                                  
             if (!e.IsAvailable)
             {
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+                {
                     Frame.Navigate(typeof(NoConnection));
                 });
-               
             }
 
             NetworkChange.NetworkAvailabilityChanged -= AvailabilityChanged;
         }
 
+        #endregion Network availability
+
+        #region Methods
+
+        /// <summary>
+        /// Method that calls the funtion that checks the API health
+        /// </summary>
         private async void GetApiStatus()
         {
             ProgressBarcontrol.IsIndeterminate = true;
 
             if (HttpHandling.GetAPIHealth())
             {
-                //MessageDialog message = new MessageDialog("Server cheked successfully!");
-                //Windows.Foundation.IAsyncOperation<IUICommand> messageExploder = message.ShowAsync();
                 await Task.Delay(TimeSpan.FromSeconds(2));
 
                 Frame.Navigate(typeof(ListScreen));
-
-                //messageExploder.Cancel();
-
             }
             else
             {
@@ -76,21 +73,17 @@ namespace BRApp
             ProgressBarcontrol.IsIndeterminate = false;
         }
 
+        #endregion Methods
 
+        #region Try again button event
 
         private void taButtonClick(IUICommand command)
         {
             GetApiStatus();
         }
 
-        private void ProgressBarcontrol_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
+        #endregion Try again button event
 
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

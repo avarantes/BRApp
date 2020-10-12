@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace BRApp
 {
+    /// <summary>
+    /// Object Questions that maps with the JSON deserialized from the API
+    /// </summary>
     public class Questions
     {
         [JsonProperty("id")]

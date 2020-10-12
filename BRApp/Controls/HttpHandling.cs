@@ -2,13 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace BRApp.Controls
 {
+    /// <summary>
+    /// Class that implements all the request to the API
+    /// </summary>
     public static class HttpHandling
     {
+        /// <summary>
+        /// Get API health
+        /// TYPE GET
+        /// </summary>
+        /// <returns></returns>
         internal static bool GetAPIHealth()
         {
             bool resultReturn = false;
@@ -19,7 +26,6 @@ namespace BRApp.Controls
 
                 try
                 {
-
                     Task<HttpResponseMessage> response = httpClient.GetAsync("health");
                     response.Wait();
 
@@ -44,16 +50,22 @@ namespace BRApp.Controls
             return resultReturn;
         }
 
+        /// <summary>
+        /// Retrieve question from the API
+        /// </summary>
+        /// <param name="questionIdToLoad">Question ID to load question details</param>
+        /// TYPE GET
+        /// <returns></returns>
         internal static Questions RetrieveQuestion(string questionIdToLoad)
         {
-            Questions questionReturn=null;
+            Questions questionReturn = null;
             using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri("https://private-anon-1831d2c376-blissrecruitmentapi.apiary-mock.com/questions/");
+                httpClient.BaseAddress = new Uri("https://private-anon-1831d2c376-blissrecruitmentapi.apiary-mock.com/");
 
                 try
                 {
-                    Task<HttpResponseMessage> response = httpClient.GetAsync(questionIdToLoad);
+                    Task<HttpResponseMessage> response = httpClient.GetAsync($"questions/{questionIdToLoad}");
                     response.Wait();
 
                     HttpResponseMessage result = response.Result;
@@ -62,7 +74,6 @@ namespace BRApp.Controls
                         Task<string> read = result.Content.ReadAsStringAsync();
                         read.Wait();
                         questionReturn = JsonConvert.DeserializeObject<Questions>(read.Result);
-
                     }
                     else
                     {
@@ -76,9 +87,14 @@ namespace BRApp.Controls
             }
 
             return questionReturn;
-
         }
 
+        /// <summary>
+        /// Update a question
+        /// </summary>
+        /// <param name="questionToVote">Question object to JSON serialize and send</param>
+        /// TYPE PUT
+        /// <returns></returns>
         internal static async Task<bool> VoteQuestionAsync(Questions questionToVote)
         {
             using (HttpClient httpClient = new HttpClient())
@@ -92,25 +108,30 @@ namespace BRApp.Controls
                     {
                         using (HttpResponseMessage response = await httpClient.PutAsync($"questions/{questionToVote.Id}", content))
                         {
-                            if(response.IsSuccessStatusCode)
+                            if (response.IsSuccessStatusCode)
                             {
                                 return true;
                             }
-                            else { 
+                            else
+                            {
                                 return false;
                             }
-                            
                         }
                     }
                 }
                 catch (Exception ex)
-                {                   
+                {
                     LogWriter.WriteLog(ex);
                     return false;
                 }
             }
         }
 
+        /// <summary>
+        /// Retrieve all the question from the API
+        /// </summary>
+        /// TYPE GET
+        /// <returns></returns>
         internal static List<Questions> GetAllQuestions()
         {
             List<Questions> questionsDataSource = new List<Questions>();
@@ -129,7 +150,6 @@ namespace BRApp.Controls
                         Task<string> read = result.Content.ReadAsStringAsync();
                         read.Wait();
                         questionsDataSource = JsonConvert.DeserializeObject<List<Questions>>(read.Result);
-
                     }
                     else
                     {
@@ -144,8 +164,5 @@ namespace BRApp.Controls
 
             return questionsDataSource;
         }
-        
     }
-
-
 }

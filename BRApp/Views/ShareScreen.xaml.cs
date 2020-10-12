@@ -8,21 +8,30 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace BRApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Share screen where we can share (by email) the questino info
     /// </summary>
     public sealed partial class ShareScreen : Page
     {
+        #region Vars
+
         private Questions question;
+
+        #endregion Vars
+
+        #region Ctor
+
         public ShareScreen()
         {
             this.InitializeComponent();
             Loaded += (sender, args) => LoadInfo();
         }
+
+        #endregion
+
+        #region Methods
 
         private void LoadInfo()
         {
@@ -33,26 +42,38 @@ namespace BRApp
             choicesGrid.ItemsSource = question.Choices;
         }
 
+        #endregion Methods
+
+        #region Navigation methods
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             BackButton.IsEnabled = this.Frame.CanGoBack;
             question = (Questions)e.Parameter;
-            
         }
+
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             On_BackRequested();
         }
+
         private bool On_BackRequested()
         {
-            if (this.Frame.CanGoBack)
+            if (Frame.CanGoBack)
             {
-                this.Frame.GoBack();
+                Frame.GoBack();
                 return true;
             }
             return false;
         }
 
+        #endregion Navigation methods
+
+        #region Events
+
+        /// <summary>
+        /// Send email button click event
+        /// </summary>
         private async void SendEmailBtn_Click(object sender, RoutedEventArgs e)
         {
             emailTxt.BorderBrush = new SolidColorBrush(Colors.Gray);
@@ -69,16 +90,12 @@ namespace BRApp
                 sb.AppendLine(question.QuestionListNames);
                 sb.AppendLine(question.Publish.ToString());
                 sb.AppendLine("Choices:");
-                foreach (Choices choice in question.Choices)
-                {
-                    sb.AppendLine(choice.ChoicesQuestionVotes);
-                }
-
-
+                question.Choices.ForEach(n => sb.AppendLine(n.ChoicesQuestionVotes));
+                
                 await EmailHelper.SendEmail(subject, sb.ToString(), emailTxt.Text);
             }
         }
 
-        
+        #endregion Events
     }
 }
