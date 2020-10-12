@@ -14,6 +14,6 @@ C#/XAML - UWP (10)
 WebAPI 
 
 ## Version
-**0.1
+**0.1**
 Authors
-António Arantes
+**António Arantes**
