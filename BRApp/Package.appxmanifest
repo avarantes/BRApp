@@ -15,7 +15,7 @@
 
   <Properties>
     <DisplayName>BRApp</DisplayName>
-    <PublisherDisplayName>arant</PublisherDisplayName>
+    <PublisherDisplayName>António Arantes</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
